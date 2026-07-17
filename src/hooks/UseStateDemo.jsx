@@ -1,124 +1,189 @@
 import { useState } from 'react'
 
-function Counter() {
+/* ─────────────────────────────────────────
+   Shared primitives
+───────────────────────────────────────── */
+
+const Card = ({ children }) => (
+  <div className="border border-zinc-800/70 rounded-2xl bg-[#111113] overflow-hidden flex flex-col">
+    {children}
+  </div>
+)
+
+const CardHeader = ({ label, title, desc }) => (
+  <div className="px-6 pt-6 pb-5 border-b border-zinc-800/60">
+    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-600 mb-2">{label}</p>
+    <h2 className="text-base font-semibold text-zinc-100 leading-snug">{title}</h2>
+    <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">{desc}</p>
+  </div>
+)
+
+const CardBody = ({ children }) => (
+  <div className="px-6 py-6 flex-1">{children}</div>
+)
+
+const Btn = ({ onClick, variant = 'ghost', className = '', children, disabled, type = 'button' }) => {
+  const base = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 active:scale-95 cursor-pointer select-none px-4 py-2 text-xs disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100'
+  const variants = {
+    primary: 'bg-violet-600 text-white hover:bg-violet-500',
+    ghost:   'bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700/80 border border-zinc-700/60',
+    danger:  'bg-transparent text-rose-400 hover:bg-rose-500/10 border border-zinc-700/60',
+  }
+  return (
+    <button type={type} disabled={disabled} onClick={onClick}
+      className={`${base} ${variants[variant]} ${className}`}>
+      {children}
+    </button>
+  )
+}
+
+/* ─────────────────────────────────────────
+   Example 1 — Counter
+───────────────────────────────────────── */
+const Counter = () => {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col gap-4 hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(124,111,234,0.15)] transition-all duration-200">
-      <div>
-        <h2 className="text-base font-semibold text-zinc-100">Counter</h2>
-        <p className="text-xs text-zinc-500 mt-1 leading-relaxed">useState holds a number and updates it on every click.</p>
-      </div>
+    <Card>
+      <CardHeader
+        label="Example 01"
+        title="Counter"
+        desc="A number stored in state. Every setCount call schedules a re-render with the new value."
+      />
+      <CardBody>
+        <div className="flex flex-col gap-6 h-full">
+          <div className="flex-1 flex items-center justify-center py-6">
+            <span className={`mono text-8xl font-medium tracking-tight transition-colors duration-200 ${count < 0 ? 'text-rose-400' : 'text-zinc-100'}`}>
+              {count}
+            </span>
+          </div>
 
-      <div className="text-5xl font-bold font-mono text-violet-400 text-center py-4 tracking-tight">
-        {count}
-      </div>
-
-      <div className="flex gap-2">
-        <button
-          onClick={() => setCount(count - 1)}
-          className="flex-1 py-2 rounded-lg text-sm font-semibold bg-rose-500/90 text-white hover:bg-rose-500 active:scale-95 transition-all cursor-pointer"
-        >
-          − Decrease
-        </button>
-        <button
-          onClick={() => setCount(0)}
-          className="flex-1 py-2 rounded-lg text-sm font-semibold bg-zinc-700 text-zinc-200 hover:bg-zinc-600 active:scale-95 transition-all cursor-pointer"
-        >
-          Reset
-        </button>
-        <button
-          onClick={() => setCount(count + 1)}
-          className="flex-1 py-2 rounded-lg text-sm font-semibold bg-violet-500 text-white hover:bg-violet-400 active:scale-95 transition-all cursor-pointer"
-        >
-          + Increase
-        </button>
-      </div>
-    </div>
+          <div className="flex items-center gap-2.5">
+            <Btn variant="danger"   onClick={() => setCount(c => c - 1)} className="flex-1">− Dec</Btn>
+            <Btn variant="ghost"    onClick={() => setCount(0)}           className="px-5">Reset</Btn>
+            <Btn variant="primary"  onClick={() => setCount(c => c + 1)} className="flex-1">+ Inc</Btn>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
   )
 }
 
-function Toggle() {
-  const [isOn, setIsOn] = useState(false)
-
-  return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col gap-4 hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(124,111,234,0.15)] transition-all duration-200">
-      <div>
-        <h2 className="text-base font-semibold text-zinc-100">Toggle</h2>
-        <p className="text-xs text-zinc-500 mt-1 leading-relaxed">useState holds a boolean and flips it on each click.</p>
-      </div>
-
-      <div className={`text-center text-2xl font-bold py-5 rounded-lg border transition-all duration-300 ${
-        isOn
-          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25'
-          : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
-      }`}>
-        {isOn ? '✅ ON' : '❌ OFF'}
-      </div>
-
-      <button
-        onClick={() => setIsOn(!isOn)}
-        className="py-2 rounded-lg text-sm font-semibold bg-violet-500 text-white hover:bg-violet-400 active:scale-95 transition-all cursor-pointer"
-      >
-        Toggle
-      </button>
-    </div>
-  )
-}
-
-function TextInput() {
+/* ─────────────────────────────────────────
+   Example 2 — Live Text Preview
+───────────────────────────────────────── */
+const LiveText = () => {
   const [text, setText] = useState('')
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col gap-4 hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(124,111,234,0.15)] transition-all duration-200">
-      <div>
-        <h2 className="text-base font-semibold text-zinc-100">Text Input</h2>
-        <p className="text-xs text-zinc-500 mt-1 leading-relaxed">useState stores what you type and re-renders the output live.</p>
-      </div>
-
-      <input
-        type="text"
-        placeholder="Type something..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:border-violet-500 transition-colors"
+    <Card>
+      <CardHeader
+        label="Example 02"
+        title="Live Text Preview"
+        desc="The input is fully controlled by state — React owns the value, not the DOM."
       />
+      <CardBody>
+        <div className="flex flex-col gap-4 h-full">
+          <input
+            value={text}
+            onChange={e => setText(e.target.value)}
+            placeholder="Type something…"
+            className="w-full bg-[#0e0e10] border border-zinc-700/60 rounded-lg px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline-none focus:border-zinc-500 transition-colors"
+          />
 
-      <div className="bg-zinc-800 border border-dashed border-zinc-700 rounded-lg px-4 py-3 text-sm min-h-11">
-        {text
-          ? <span className="text-zinc-100">You typed: <strong className="text-violet-400">{text}</strong></span>
-          : <span className="text-zinc-500 italic">Nothing typed yet</span>
-        }
+          <div className="flex-1 rounded-xl border border-dashed border-zinc-800 px-4 py-4 min-h-20 flex items-start">
+            {text
+              ? <p className="text-sm text-zinc-100 leading-relaxed">{text}</p>
+              : <p className="text-xs text-zinc-600 italic mt-0.5">Preview appears here…</p>
+            }
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-zinc-600">{text.length} characters</span>
+            {text && <Btn variant="ghost" onClick={() => setText('')} className="py-1.5 text-[11px]">Clear</Btn>}
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+  )
+}
+
+/* ─────────────────────────────────────────
+   Example 3 — Theme Toggle
+───────────────────────────────────────── */
+const ThemeToggle = () => {
+  const [dark, setDark] = useState(true)
+
+  return (
+    <Card>
+      <CardHeader
+        label="Example 03"
+        title="Theme Toggle"
+        desc="A boolean flipped with one setState call — exactly how real theme switches work."
+      />
+      <CardBody>
+        <div className="flex flex-col gap-5 h-full">
+          {/* Preview panel */}
+          <div className={`flex-1 rounded-xl border px-5 py-5 transition-all duration-300 ${
+            dark
+              ? 'bg-[#0e0e10] border-zinc-800 text-zinc-100'
+              : 'bg-white border-zinc-200 text-zinc-900'
+          }`}>
+            <p className={`text-[10px] font-semibold uppercase tracking-wider mb-3 ${dark ? 'text-zinc-600' : 'text-zinc-400'}`}>
+              App Preview
+            </p>
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className={`w-2 h-2 rounded-full ${dark ? 'bg-violet-400' : 'bg-violet-600'}`} />
+              <span className="text-sm font-semibold">Dashboard</span>
+            </div>
+            <p className={`text-xs ${dark ? 'text-zinc-500' : 'text-zinc-400'}`}>
+              {dark ? 'Dark mode is active' : 'Light mode is active'}
+            </p>
+          </div>
+
+          {/* Toggle row */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-zinc-400">{dark ? '🌙 Dark mode' : '☀️ Light mode'}</span>
+            <button
+              onClick={() => setDark(v => !v)}
+              className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer outline-none ${dark ? 'bg-violet-600' : 'bg-zinc-300'}`}
+            >
+              <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-300 ${dark ? 'translate-x-6' : 'translate-x-0'}`} />
+            </button>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+  )
+}
+
+/* ─────────────────────────────────────────
+   Page
+───────────────────────────────────────── */
+const UseStateDemo = () => (
+  <div className="flex flex-col gap-10">
+
+    <div className="flex flex-col gap-3 pb-6 border-b border-zinc-800/50">
+      <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-600">Hook 01</span>
+      <h1 className="text-4xl font-semibold text-zinc-100 tracking-tight">
+        <span className="mono">useState</span>
+      </h1>
+      <p className="text-sm text-zinc-500 leading-relaxed max-w-xl">
+        Declares a piece of <strong className="text-zinc-300 font-medium">reactive state</strong> inside a component.
+        React re-renders automatically whenever the value changes.
+      </p>
+      <div className="inline-flex rounded-lg border border-zinc-800 bg-[#111113] px-4 py-2.5 w-fit">
+        <code className="mono text-xs text-violet-400">const [value, setValue] = useState(initial)</code>
       </div>
     </div>
-  )
-}
 
-export default function UseStateDemo() {
-  return (
-    <section className="max-w-4xl mx-auto flex flex-col gap-10">
+    <div className="grid grid-cols-3 gap-5">
+      <Counter />
+      <LiveText />
+      <ThemeToggle />
+    </div>
 
-      <div className="flex flex-col gap-3">
-        <span className="inline-block bg-violet-500/15 text-violet-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest w-fit">
-          Hook #1
-        </span>
-        <h1 className="text-4xl font-bold font-mono text-violet-400 leading-none">useState</h1>
-        <p className="text-sm text-zinc-400 leading-relaxed max-w-lg">
-          Adds local state to a functional component. React re-renders the component whenever the state changes.
-        </p>
-        <div className="bg-zinc-900 border border-zinc-800 border-l-2 border-l-violet-500 rounded-lg px-4 py-3 w-fit">
-          <code className="font-mono text-sm text-violet-400">
-            const [value, setValue] = useState(initialValue)
-          </code>
-        </div>
-      </div>
+  </div>
+)
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <Counter />
-        <Toggle />
-        <TextInput />
-      </div>
-
-    </section>
-  )
-}
+export default UseStateDemo

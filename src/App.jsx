@@ -1,41 +1,77 @@
+import { useState } from 'react'
 import UseStateDemo from './hooks/UseStateDemo'
+import UseEffectDemo from './hooks/UseEffectDemo'
 
-const hooks = [
-  { name: 'useState', active: true },
-  { name: 'useEffect', active: false },
-  { name: 'useRef', active: false },
-  { name: 'useContext', active: false },
-  { name: 'useReducer', active: false },
-  { name: 'useMemo', active: false },
-  { name: 'useCallback', active: false },
+const HOOKS = [
+  { name: 'useState',    label: 'useState',    number: 1, component: <UseStateDemo /> },
+  { name: 'useEffect',   label: 'useEffect',   number: 2, component: <UseEffectDemo /> },
+  { name: 'useRef',      label: 'useRef',      number: 3, component: null },
+  { name: 'useContext',  label: 'useContext',  number: 4, component: null },
+  { name: 'useReducer',  label: 'useReducer',  number: 5, component: null },
+  { name: 'useMemo',     label: 'useMemo',     number: 6, component: null },
+  { name: 'useCallback', label: 'useCallback', number: 7, component: null },
 ]
 
-export default function App() {
+const App = () => {
+  const [active, setActive] = useState('useState')
+  const current = HOOKS.find((h) => h.name === active)
+
   return (
-    <div className="flex min-h-screen bg-zinc-950 text-zinc-100">
+    /* Full-bleed container — no max-width here */
+    <div className="flex h-screen overflow-hidden bg-[#0e0e10] text-zinc-200">
 
-      <nav className="w-56 shrink-0 bg-zinc-900 border-r border-zinc-800 flex flex-col gap-6 p-5">
-        <span className="text-violet-400 font-bold text-sm tracking-wide px-2">⚛ React Hooks</span>
-        <ul className="flex flex-col gap-1">
-          {hooks.map((h) => (
-            <li
-              key={h.name}
-              className={`px-3 py-2 rounded-lg text-sm font-mono transition-all
-                ${h.active
-                  ? 'bg-violet-500/15 text-violet-400 border-l-2 border-violet-500 pl-2.5'
-                  : 'text-zinc-500 opacity-40 cursor-not-allowed'
-                }`}
-            >
-              {h.name}
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {/* ── Sidebar — owns its own background ── */}
+      <aside className="w-48 shrink-0 bg-[#141416] border-r border-white/[0.05] flex flex-col pt-8 px-3 pb-6 gap-7">
+        <div className="px-2">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-600">
+            React Hooks
+          </p>
+        </div>
 
-      <main className="flex-1 px-10 py-12 overflow-y-auto">
-        <UseStateDemo />
+        <nav className="flex-1">
+          <ul className="flex flex-col gap-0.5">
+            {HOOKS.map((h) => {
+              const isActive   = h.name === active
+              const available  = !!h.component
+              return (
+                <li key={h.name}>
+                  <button
+                    disabled={!available}
+                    onClick={() => setActive(h.name)}
+                    className={`w-full text-left flex items-center gap-2.5 px-2 py-1.5 rounded-md transition-colors cursor-pointer disabled:cursor-not-allowed ${
+                      isActive
+                        ? 'bg-white/[0.07] text-zinc-100'
+                        : available
+                          ? 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.04]'
+                          : 'text-zinc-700 opacity-50'
+                    }`}
+                  >
+                    <span className={`mono text-[9px] w-4 text-right shrink-0 tabular-nums ${
+                      isActive ? 'text-violet-400' : 'text-zinc-700'
+                    }`}>
+                      {String(h.number).padStart(2, '0')}
+                    </span>
+                    <span className="mono text-[12px] tracking-tight">{h.label}</span>
+                    {!available && (
+                      <span className="ml-auto text-[9px] text-zinc-700 uppercase tracking-wider">soon</span>
+                    )}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+      </aside>
+
+      {/* ── Main — max-width lives here only ── */}
+      <main className="flex-1 overflow-y-auto bg-[#0e0e10]">
+        <div className="max-w-6xl mx-auto w-full px-10 py-10">
+          {current?.component}
+        </div>
       </main>
 
     </div>
   )
 }
+
+export default App
