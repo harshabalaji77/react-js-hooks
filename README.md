@@ -1,15 +1,15 @@
-# React Hooks Examples
+## React Hooks Examples
 
 An interactive guide to React Hooks with live examples and hands-on demonstrations.
 
-## Getting Started
+### Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Available Hooks
+### Available Hooks
 
 - useState (Complete)
 - useEffect (Complete)
@@ -19,7 +19,7 @@ npm run dev
 - useMemo (Coming Soon)
 - useCallback (Coming Soon)
 
-## Examples
+### Examples
 
 **useState** - Counter, text preview, theme toggle
 
