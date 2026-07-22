@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import UseStateDemo from './hooks/UseStateDemo'
 import UseEffectDemo from './hooks/UseEffectDemo'
+import UseRefDemo from './hooks/UseRefDemo'
 
 const HOOKS = [
   { name: 'useState',    label: 'useState',    number: 1, component: <UseStateDemo /> },
   { name: 'useEffect',   label: 'useEffect',   number: 2, component: <UseEffectDemo /> },
-  { name: 'useRef',      label: 'useRef',      number: 3, component: null },
+  { name: 'useRef',      label: 'useRef',      number: 3, component: <UseRefDemo /> },
   { name: 'useContext',  label: 'useContext',  number: 4, component: null },
   { name: 'useReducer',  label: 'useReducer',  number: 5, component: null },
   { name: 'useMemo',     label: 'useMemo',     number: 6, component: null },
