@@ -1,4 +1,4 @@
-## React Hooks Catalog
+# React Hooks
 
 An interactive, dark-themed learning laboratory demonstrating standard React hooks through minimal, production-grade examples. Built using React 19, Vite, and Tailwind CSS.
 
@@ -30,7 +30,7 @@ npm run dev
 
 ---
 
-#### Detailed Catalog & Included Examples
+### Detailed Catalog & Included Examples
 
 #### 1. useState
 Manages component-local state. React automatically schedules a re-render when state changes.
