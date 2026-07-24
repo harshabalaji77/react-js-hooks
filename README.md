@@ -23,7 +23,7 @@ npm run dev
 | 01 | `useState` | Completed | [UseStateDemo.jsx](src/hooks/UseStateDemo.jsx) |
 | 02 | `useEffect` | Completed | [UseEffectDemo.jsx](src/hooks/UseEffectDemo.jsx) |
 | 03 | `useRef` | Completed | [UseRefDemo.jsx](src/hooks/UseRefDemo.jsx) |
-| 04 | `useContext` | Planned | *Coming soon* |
+| 04 | `useContext` | Completed | [UseContextDemo.jsx](src/hooks/UseContextDemo.jsx) |
 | 05 | `useReducer` | Planned | *Coming soon* |
 | 06 | `useMemo` | Planned | *Coming soon* |
 | 07 | `useCallback` | Planned | *Coming soon* |
@@ -49,3 +49,9 @@ Holds persistent values that persist across renders without triggering a re-rend
 * **Direct DOM Access:** Controls standard DOM elements (like focus/selection attributes).
 * **State vs. Ref:** Illustrates the functional difference between re-rendering state vs. silent refs.
 * **Track Previous Value:** Implements an offset memory reference to inspect a value's state on the previous render.
+
+#### 4. useContext
+Reads a value from the nearest Context Provider in the tree without prop drilling.
+* **Theme Context:** Shares a dark/light theme value across child components with no props.
+* **User Auth Context:** Provides a logged-in user object to any component in the tree.
+* **Language Context:** Switches the UI language globally from a single context value.
