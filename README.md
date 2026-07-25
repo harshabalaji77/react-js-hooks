@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
----
+#
 
 ### Hooks Status & Directory Map
 
@@ -28,7 +28,7 @@ npm run dev
 | 06 | `useMemo` | Planned | *Coming soon* |
 | 07 | `useCallback` | Planned | *Coming soon* |
 
----
+#
 
 ### Detailed Catalog & Included Examples
 
