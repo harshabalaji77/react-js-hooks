@@ -3,13 +3,14 @@ import UseStateDemo from './hooks/UseStateDemo'
 import UseEffectDemo from './hooks/UseEffectDemo'
 import UseRefDemo from './hooks/UseRefDemo'
 import UseContextDemo from './hooks/UseContextDemo'
+import UseReducerDemo from './hooks/UseReducerDemo'
 
 const HOOKS = [
   { name: 'useState',    label: 'useState',    number: 1, component: <UseStateDemo /> },
   { name: 'useEffect',   label: 'useEffect',   number: 2, component: <UseEffectDemo /> },
   { name: 'useRef',      label: 'useRef',      number: 3, component: <UseRefDemo /> },
   { name: 'useContext',  label: 'useContext',  number: 4, component: <UseContextDemo /> },
-  { name: 'useReducer',  label: 'useReducer',  number: 5, component: null },
+  { name: 'useReducer',  label: 'useReducer',  number: 5, component: <UseReducerDemo /> },
   { name: 'useMemo',     label: 'useMemo',     number: 6, component: null },
   { name: 'useCallback', label: 'useCallback', number: 7, component: null },
 ]
