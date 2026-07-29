@@ -24,7 +24,7 @@ npm run dev
 | 02 | `useEffect` | Completed | [UseEffectDemo.jsx](src/hooks/UseEffectDemo.jsx) |
 | 03 | `useRef` | Completed | [UseRefDemo.jsx](src/hooks/UseRefDemo.jsx) |
 | 04 | `useContext` | Completed | [UseContextDemo.jsx](src/hooks/UseContextDemo.jsx) |
-| 05 | `useReducer` | Planned | *Coming soon* |
+| 05 | `useReducer` | Completed | [UseReducerDemo.jsx](src/hooks/UseReducerDemo.jsx) |
 | 06 | `useMemo` | Planned | *Coming soon* |
 | 07 | `useCallback` | Planned | *Coming soon* |
 
@@ -55,3 +55,10 @@ Reads a value from the nearest Context Provider in the tree without prop drillin
 * **Theme Context:** Shares a dark/light theme value across child components with no props.
 * **User Auth Context:** Provides a logged-in user object to any component in the tree.
 * **Language Context:** Switches the UI language globally from a single context value.
+
+#### 5. useReducer
+An alternative to `useState` for managing more complex state logic using a reducer function and dispatched actions.
+* **Data Fetching (State Machine):** Prevents impossible states by guaranteeing the app is only ever in one explicit status (idle, loading, success, or error) at a time.
+* **Form State:** Manages an object with multiple fields, dynamically updating properties based on input names.
+* **Todo List Array:** Handles array operations (add, map, filter/delete) predictably without mutating the original state.
+
