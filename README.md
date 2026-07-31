@@ -26,7 +26,7 @@ npm run dev
 | 04 | `useContext` | Completed | [UseContextDemo.jsx](src/hooks/UseContextDemo.jsx) |
 | 05 | `useReducer` | Completed | [UseReducerDemo.jsx](src/hooks/UseReducerDemo.jsx) |
 | 06 | `useMemo` | Completed | [UseMemoDemo.jsx](src/hooks/UseMemoDemo.jsx) |
-| 07 | `useCallback` | Planned | *Coming soon* |
+| 07 | `useCallback` | Completed | [UseCallbackDemo.jsx](src/hooks/UseCallbackDemo.jsx) |
 
 #
 
@@ -67,5 +67,8 @@ Caches the result of a calculation between renders. It only recalculates when de
 * **Expensive Calculation:** Simulates heavy JS math to demonstrate how caching the result prevents the UI from freezing when unrelated state (like theme) changes.
 * **Filtering Lists:** Prevents an expensive array `filter()` operation from running on every single render.
 * **Referential Equality:** Proves how wrapping an object configuration in `useMemo` prevents infinite loops in `useEffect` dependency checks.
-
-
+#### 7. useCallback
+Caches a function definition between renders so its reference stays stable, preventing unnecessary child re-renders and infinite loops in effects.
+* **Prevent Child Re-renders:** Demonstrates how a stable callback paired with `React.memo` stops a child component from re-rendering when unrelated parent state changes.
+* **Stable in useEffect:** Shows how wrapping a callback in `useCallback` prevents an infinite loop when the function is listed as a `useEffect` dependency.
+* **useMemo vs useCallback:** A side-by-side comparison of both hooks — `useMemo` caches a computed value, `useCallback` caches the function itself.
