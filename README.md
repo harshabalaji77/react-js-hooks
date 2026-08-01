@@ -7,7 +7,6 @@ A dark-themed, interactive reference dashboard that demonstrates every standard 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white&style=flat-square)
 ![ESLint](https://img.shields.io/badge/ESLint-10-4B32C3?logo=eslint&logoColor=white&style=flat-square)
 
----
 
 ### Overview
 
@@ -15,7 +14,6 @@ A dark-themed, interactive reference dashboard that demonstrates every standard 
 
 The app features a dark sidebar navigator, letting you switch between hook demos instantly without page reloads.
 
----
 
 ### Tech Stack
 
@@ -26,7 +24,6 @@ The app features a dark sidebar navigator, letting you switch between hook demos
 | Styling | Tailwind CSS | ^4.3.2 |
 | Linting | ESLint + react-hooks plugin | ^10.x |
 
----
 
 ### Getting Started
 
@@ -46,6 +43,7 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) in your browser. Hot Module Replacement (HMR) is enabled — changes reflect instantly.
 
+
 ### Available Scripts
 
 | Command | Description |
@@ -55,7 +53,6 @@ Open [http://localhost:5173](http://localhost:5173) in your browser. Hot Module 
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint across the entire project |
 
----
 
 ### Hook Catalog
 
@@ -71,7 +68,6 @@ All seven standard hooks are covered, each with three focused, runnable examples
 | 06 | `useMemo` | Cache expensive computed values between renders | [UseMemoDemo.jsx](src/hooks/UseMemoDemo.jsx) |
 | 07 | `useCallback` | Cache function references to prevent unnecessary re-renders | [UseCallbackDemo.jsx](src/hooks/UseCallbackDemo.jsx) |
 
----
 
 ### Demo Breakdown
 
@@ -136,7 +132,6 @@ All seven standard hooks are covered, each with three focused, runnable examples
 - **Stable in `useEffect`** — Wrapping a callback in `useCallback` prevents an infinite loop when that function is a `useEffect` dependency.
 - **`useMemo` vs `useCallback`** — A side-by-side comparison: `useMemo` caches a *value*, `useCallback` caches the *function itself*.
 
----
 
 ### Project Structure
 
@@ -161,7 +156,6 @@ react-hooks/
 └── package.json
 ```
 
----
 
 ### Adding a New Hook Demo
 
